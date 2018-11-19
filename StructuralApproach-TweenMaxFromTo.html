@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TweenMax.fromTo()</title>
+	<style>
+		body{
+			background-color: #f8f8f8;
+			font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+			font-size:14px;
+			color: #000;
+			margin: 0 10px;
+			padding: 0;
+		}
+		.box{
+			width: 50px;
+			height: 50px;	
+			border-radius: 6px;
+			margin-top: 4px;		
+		}
+		.green{
+			background-color: #6fb936;
+		}
+	</style>
+</head>
+<body>
+	<div class="box green"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script>
+	var myTween = TweenMax.fromTo('.box',3,{
+		x:500,
+	},{
+		x:200,
+	});
+</script>
+</html>
+<!-- 笔记 
+	TweenMax.fromTo(target:object,duration:Number,fromVar:Object,toVars:Object):TweenMax
+	通过设置动画起始点和结束点来初始化一个TweenMax，相当于动画从设置点到第二个设置点
+	TweenMax.from([element1,element2],1,{x:200},{x,500});
+
+
+	参数：
+	target：object|必填|需要缓动的对象
+	duration:number|必填|动画持续时间，一般是秒
+	fromVar:object|必填|起始点动画参数
+	toVars:object|必填|结束点动画参数
+-->

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画库学习二</title>
+	<script src="./js/jquery-2.1.4.min.js"></script>
+	<script src="./js/TweenMax.js"></script> 
+	<style>
+	html,body{
+		margin: 0;
+		padding: 0;
+	}
+	#div1{
+		width: 100px;
+		height: 100px;
+		background: #8D121A;
+		position: absolute;
+		left: 0;
+		top: 100px;
+	}
+</style> 
+</head>
+<body>
+	<input type="button" value="开始动画" id="play">
+	<input type="button" value="暂停动画" id="pause">
+	<input type="button" value="反转动画" id="reverse">
+	<div id="div1"></div>
+</body>
+</html>
+<script>
+	$(function(){
+		var t = new TimelineMax();
+		t.to('#div1',2,{left:300});
+		t.add('state1');
+		t.add(function(){
+			$('#div1').css('background','blue');
+		});
+		t.to('#div1',2,{width:300});
+		t.add('state2');	
+		t.to('#div1',2,{height:300});
+		t.add('state3');	
+		t.stop();
+		t.tweenTo(1.5);
+		t.tweenTo('state2');		
+		console.log(t);		
+
+		$('#play').click(function(){
+			t.play();
+		});	
+		$('#pause').click(function(){
+			t.pause();
+		});	
+		$('#reverse').click(function(){
+			t.reverse();
+		});	
+	});
+</script>
+
+<!-- 笔记 
+	add()---添加状态
+	参数说明：字符串或一个函数
+	TweenTo---完成指定的动画（过渡(时间|字符串)）
+-->

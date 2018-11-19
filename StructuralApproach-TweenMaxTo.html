@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TweenMax</title>
+	<style>
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="box green"></div>
+		<div class="box orange"></div>
+		<div class="box grey"></div>
+	</div>
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+var myTween = TweenMax.to(".box", 1, {
+  x: function(index,target) {
+    console.log(index,target);
+    return (index + 1) * 100 // 100, 200, 300
+  }
+})
+	console.log(myTween);
+</script>
+</html>
+<!-- 笔记 
+	TweenMax.to(target:Object, duration:Number, vars:Object):TweenMax;
+	通过设定动画重点来初始化一个TweenMax ，是最常用的TweenMax结构化方式
+	以下几个方式都可以初始化一个Tween
+	TweenMax.to(obj,1,{x:100});
+	var myTween = new TweenMax(obj,1,{x:100});
+	var myTween = TweenMax.to(obj,1,{x:100});
+	对多个目标进行动画
+	TweenMax.to([obj1,obj2,obj3],1,{x:100});
+
+
+	参数：
+	target:object|必填|需要缓动的对象
+	duration:number|必填|动画持续时间，一般是秒
+	vars:object|必填|动画参数(CSS属性、延迟、重复次数等)
+-->

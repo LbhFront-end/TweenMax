@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画库学习三</title>
+	<script src="./js/jquery-2.1.4.min.js"></script>
+	<script src="./js/TweenMax.js"></script> 
+	<style>
+	#div1{
+		width: 100px;
+		height: 100px;
+		background: #8D121A;
+		position: absolute;
+		left: 0;
+		top: 100px;			
+	}
+</style>
+</head>
+<body>
+	<input type="button" value="开始动画" id="play">
+	<input type="button" value="暂停动画" id="pause">
+	<input type="button" value="反转动画" id="reverse">	
+	<input type="button" value="清除动画" id="clear">	
+	<div id="div1"></div>
+</body>
+</html>
+<script>
+	$(function(){
+		var t = new TimelineMax();
+		t.to('#div1',2,{left:300,onComplete:function(){
+			console.log(this);
+		}});
+		t.add('state2');		
+		t.to('#div1',2,{width:300});
+		t.to('#div1',2,{height:300});
+		// t.seek(2);
+		t.seek('state2',false);
+		console.log(t.time());
+		$('#play').click(function(){
+			t.play();
+		});	
+		$('#pause').click(function(){
+			t.pause();
+		});	
+		$('#reverse').click(function(){
+			t.reverse();
+		});			
+		$('#clear').click(function(){
+			t.clear();
+		});			
+	});
+</script>
+<!-- 笔记
+seek((时间|状态))---完成指定的动画（无过渡）
+seek("状态",false) 会跳到"状态"开始执行，但是前面的一些函数，例如正向完成的或者反转的会执行
+
+time() 动画已执行的时间
+clear()：清除所有动画
+-->

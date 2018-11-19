@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画库学习五</title>
+	<script src="./js/jquery-2.1.4.min.js"></script>
+	<script src="./js/TweenMax.js"></script> 
+	<style>
+
+	#div1{
+		width:100px;
+		height:100px;
+		background: #8D121A;
+		position: absolute;
+		top:100px;
+		left:0;
+	}	
+</style>	
+</head>
+<body>
+	<input type="button" value="开始动画" id="play">
+	<input type="button" value="暂停动画" id="pause">
+	<input type="button" value="反转动画" id="reverse">	
+	<input type="button" value="清除动画" id="clear">	
+	<div id="label"></div>
+	<div id="div1"></div>
+</body>
+</html>
+<script>
+	$(function(){
+		var t = new TimelineMax();
+		t.add('state1');		
+		t.to('#div1',1,{left:300,onComplete:function(){
+			getCurrentLabel(); // state1
+		}},1);
+		t.add('state2');
+		t.to('#div1',1,{width:300,onComplete:function(){
+			getCurrentLabel(); // state2
+		}},"+=1");
+		t.add('state3');		
+		t.to('#div1',1,{height:300,onComplete:function(){
+			getCurrentLabel(); // state3
+		}},"+=1");	
+		getCurrentLabel(); // state4
+		function getCurrentLabel(){
+			// 获取当前时间
+			var currnetTime = t.getLabelTime(t.currentLabel());
+			// 获取上一个状态
+			var beforeLabel = t.getLabelBefore(currnetTime);
+			// 获取下一个状态
+			var afterLabel = t.getLabelAfter(currnetTime);
+			var str = "<p>上一个状态：" + beforeLabel + "</p><p>当前状态" + t.currentLabel() + "</p><p>下一个状态" +  afterLabel + "</p>";
+			$("#label").html(str);
+		}
+	});
+</script>
+<!-- 笔记
+	currentLabel()：获取当前状态,返回值是状态的字符串
+	getLabelAfter(时间数字)：获取下一个状态,如果没有下一个状态返回null
+	getLabelBefore(时间数字)：获取上一个状态,返回值是状态的字符串，如果没有上一个状态返回null
+ -->

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画库学习六</title>
+	<script src="./js/jquery-2.1.4.min.js"></script>
+	<script src="./js/TweenMax.js"></script> 
+	<style>
+
+	#div1{
+		width:100px;
+		height:100px;
+		background: #8D121A;
+		position: absolute;
+		top:100px;
+		left:0;
+	}	
+</style>	
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>
+<script>
+	$(function(){
+		var t = new TimelineMax();
+		t.to('#div1',1,{left:300,ease:Linear.None},1);
+	});
+</script>

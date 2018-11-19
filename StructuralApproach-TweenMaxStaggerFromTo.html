@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TweenMax.staggerFromTo()</title>
+	<style>
+	body{
+		background-color:#1d1d1d;
+		color:#f3f2ef;
+	}
+	h2 {
+		font-family: "Signika Negative", sans-serif;
+		margin: 10px 0 10px 0;
+		font-size:30px;
+	}	
+	.box {
+		width:50px;
+		height:50px;
+		position:relative;
+		border-radius:6px;
+		display:inline-block;
+		background:grey;
+	}
+	p{
+		line-height:22px;
+		margin-bottom:16px;
+	}
+	#demo {
+		height:100%;
+		position:relative;
+	}	
+	.green{
+		background-color:#6fb936;
+	}
+	.orange {
+		background-color:#f38630;
+	}
+	.grey {
+		background-color:#989898;
+	}
+</style>
+</head>
+<body>
+	<h2>TweenMax.staggerFromTo() with cycle</h2>
+	<div id="demo">
+		<p>cycle属性允许你在所有TweenMax、TimelineLite和 TimelineMax插件中基于stagger的函数里面，定义一个array的属性值或者function的属性值 (注释中有详细列表)。
+		</p>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	TweenMax.staggerFromTo(".box",1,{
+		cycle:{
+			backgroundColor:["red", "white", "#00f"],
+			rotation:0,
+			y:function(index){
+				return index*10;
+			}
+		}
+	},{
+		cycle:{
+			backgroundColor:["green", "orange", "pink"],
+			rotation:360,
+			y:function(){
+				return (Math.random() * 100) + 20;
+			}
+		}
+	},0.5);
+
+</script>
+</html>
+<!-- 笔记 
+	TweenMax.staggerTo(targets:Array,duration:Number,fromVars:Object,toVars:Object,stagger:Number,onCompleteAll:Function,onCompleteAllParams:Array,onCompleteAllScope:*):Array
+	通过设定序列动画的终点来初始化一组TweenMax
+
+	var objects = [obj1,obj2,obj3,obj4,obj5];
+	TweenMax.staggerFromTo(objects,1,{opactity:1},{opacity:0},0.2);
+
+
+	参数：
+	targets：Array|必填|需要进行动画的显示对象，可以有多个，以数组形式传入
+	duration:number|必填|动画持续时间，一般是秒(或帧数，如果设置了useFrames:true)
+	fromVars:object|必填|设置动画的一些属性以及其他参数
+	toVars:object|必填|设置动画的一些属性以及其他参数
+	stagger：Number|否|每个动画的起始间隔，默认是0
+	onCompleteAll:Function|否|当所有显示对象都完成动画要调用的函数
+	onCompleteAllParams:Array|否|onCompleteAll函数的参数，以数组形式传入
+	onCompleteAllScope:否|onCompleteAll函数的作用域，this
+
+	weenMax.staggerTo()的补充说明
+	stagger系列方法可用于TweenMax、TimelineLite、TimelineMax，不可用于TweenLite。
+	由于stagger系列方法（staggerTo、staggerFrom、staggerFromTo）返回的是一个tween的数组，所以不可以直接对其返回值直接使用tween的属性和方法。
+	tween=TweenMax.to(...)
+	tween.play()//播放动画
+
+	tween=TweenMax.staggerTo(...)
+	tween.play()//无法使用
+	stagger系列方法可以使用cycle属性来循环设置动画参数值。	
+-->

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画库学习一</title>
+	<script src="./js/jquery-2.1.4.min.js"></script>
+	<script src="./js/TweenMax.js"></script>  
+	<style>
+	html,body{
+		margin: 0;
+		padding: 0;
+	}
+	#div1{
+		width: 100px;
+		height: 100px;
+		background: #8D121A;
+		position: absolute;
+		left: 0;
+		top: 100px;
+	}
+</style>
+</head>
+<body>
+	<input type="button" id="play" value="播放"/>
+	<input type="button" id="stop" value="停止"/>	
+	<input type="button" id="reverse" value="反向动画"/>
+	<div id="div1"></div>
+</body>
+</html>
+<script>
+	$(function(){
+		var t = new TimelineMax();
+		t.to('#div1',1,{left:300,onComplete:function(){
+			console.log(this);
+		},onReverseComplete(){
+			console.log('finish');
+		}},1);
+		t.to('#div1',2,{width:300},"+=1");
+		t.to('#div1',2,{height:300},"+=1");
+		t.to('#div1',2,{top:300});
+		t.to('#div1',2,{rotationZ:180});
+		t.stop(); // 停止动画
+
+     $("#play").click(function(){
+     	t.play();
+     });     
+     $("#stop").click(function(){
+     	t.stop();
+     });     
+     $("#reverse").click(function(){
+     	t.reverse();
+     });
+ });
+</script>
+
+<!--
+
+笔记：
+ t.to("元素选择器或对象",持续时间,对象,【可选】动画延迟发生时间可写数字,"-=0.5","+=0.5")
+1. 元素选择器或对象
+2. 持续时间
+3. 对象
+变化的属性->值
+4. 【可选】动画延迟发生时间 可写数字，“-=0.5”，“+=0.5“ 
+
+stop()：停止动画
+play()：开始动画
+reverse()：反向开始动画
+onComplete()：运动结束后触发对应的函数
+onReverseComplete()：反向运动结束后触发对应的函数
+
+
+
+ -->

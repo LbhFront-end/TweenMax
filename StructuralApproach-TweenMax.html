@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TweenMax</title>
+	<style>
+	.box{
+		width: 100px;
+		height: 100px;
+		border-radius: 5px;
+		margin-top: 4px;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+</style>
+</head>
+<body>
+	<div class="box green"></div>
+	<p>先右移动并改变透明度</p>
+</body>
+<script src="./js/TweenMax.js"></script> 
+<script>
+	new TweenMax('.box',3,{
+		x:500,
+		alpha:0.3
+	});
+</script>
+</html>
+<!-- 笔记 
+	.TweenMax(target:Object, duration:Number, vars:Object);
+	TweenMax 构造函数，用来创建一个TweenMax对象。
+	如果使用TweenLite 则是 TweenLite();
+
+	参数：
+	target:object|必填|需要缓动的对象
+	duration:number|必填|动画持续时间，一般是秒
+	vars:object|必填|动画参数
+-->

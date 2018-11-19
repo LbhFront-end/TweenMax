@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画库学习四</title>
+	<script src="./js/jquery-2.1.4.min.js"></script>
+	<script src="./js/TweenMax.js"></script> 
+	<style>
+	.box{
+		width: 100px;
+		height: 100px;
+		margin: 1px 0;	
+		background: #8D121A;	
+	}
+	#div1{
+		width:100px;
+		height:100px;
+		background: #8D121A;
+		position: absolute;
+		top:0;
+		left:0;
+	}	
+</style>	
+</head>
+<body>
+	<input type="button" value="开始动画" id="play">
+	<input type="button" value="暂停动画" id="pause">
+	<input type="button" value="反转动画" id="reverse">	
+	<input type="button" value="清除动画" id="clear">	
+	<div id="div1"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>	
+</body>
+</html>
+<script>
+	$(function(){
+		var t = new TimelineMax();
+		t.to('#div1',1,{left:400});
+		t.add('state1');
+		t.staggerTo('.box',2,{width:300},1);
+		t.to('#div1',1,{top:300});		
+		$('#play').click(function(){
+			t.play();
+		});	
+		$('#pause').click(function(){
+			t.pause();
+		});	
+		$('#reverse').click(function(){
+			t.reverse();
+		});			
+		$('#clear').click(function(){
+			t.clear();
+		});		
+		console.log(t.totalDuration());
+		console.log(t.getLabelTime("state1"));
+	});
+</script>
+<!-- 笔记 
+
+staggerTo()：添加动画
+	staggerTo("元素选择器或对象",持续时间,对象,动画延迟发生时间); 
+	参数:
+	1. 元素选择器或对象
+	2. 持续时间
+	3. 对象
+	    变化的属性->值
+	4. 【可选】动画延迟发生时间
+	    可写数字，“-=0.5”，“+=0.5“	
+
+totalDuration()：获取动画的总时长	    
+
+getLabelTime(字符串)：返回从开始到当前状态的时间
+
+-->
