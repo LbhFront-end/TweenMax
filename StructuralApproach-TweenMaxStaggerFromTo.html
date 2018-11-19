@@ -63,19 +63,19 @@
 	TweenMax.staggerFromTo(".box",1,{
 		cycle:{
 			backgroundColor:["red", "white", "#00f"],
-			rotation:0,
 			y:function(index){
 				return index*10;
-			}
-		}
+			}			
+		},
+		rotation:0,
 	},{
 		cycle:{
-			backgroundColor:["green", "orange", "pink"],
-			rotation:360,
+			backgroundColor:["green", "orange", "pink"],			
 			y:function(){
 				return (Math.random() * 100) + 20;
-			}
-		}
+			}			
+		},
+		rotation:360, 
 	},0.5);
 
 </script>
