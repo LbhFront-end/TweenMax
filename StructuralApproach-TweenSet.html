@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TweenMax.set()</title>
+	<style>
+	.box{
+		width: 100px;
+		height: 100px;
+		border-radius: 5px;
+		margin: 10px 100px 0;
+		display: inline-block;
+		background-color: #6fb936;
+	}
+	.nbox{
+		display:inline-block;
+		margin: 10px auto 0;
+		width: 100px;
+		height: 100px;
+	}
+	</style>
+</head>
+<body>
+	<p>右边的方块设置了透视transformPerspective，因此产生了3D效果</p>
+	<div class="wrapper">
+		<div class="box"></div>
+		<div class="nbox box"></div>
+	</div>
+</body>
+<script src="./js/TweenMax.js"></script> 
+<script>
+TweenMax.set('.nbox',{transformPerspective:300});
+TweenMax.to('.box',3,{rotationY:360,transformOrigin:'right bottom'});
+</script>
+</html>
+<!-- 笔记 
+	TweenMax.set(target:Object,vars:Object):TweenMax
+	立即设置目标的属性值而不产生过渡动画，相当于0的动画时间，返回TweenMax对象
+	以下两个设置作用相同
+	TweenMax.set(myObject,{x:100});
+	TweenMax.to(myObject,0,{x:100});
+
+	参数：
+	target:object|必填|需要缓动的对象
+	vars:object|必填|动画参数
+-->
