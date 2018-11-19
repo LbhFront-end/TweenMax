@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TweenMax.staggerdelayedCall()</title>
+	<style>
+	body{
+		background-color:#1d1d1d;
+		color:#f3f2ef;
+	}
+	h2 {
+		font-family: "Signika Negative", sans-serif;
+		margin: 10px 0 10px 0;
+		font-size:30px;
+	}	
+	.box {
+		width:50px;
+		height:50px;
+		position:relative;
+		border-radius:6px;
+		display:inline-block;
+		background:grey;
+	}
+	p{
+		line-height:22px;
+		margin-bottom:16px;
+	}
+	#demo {
+		height:100%;
+		position:relative;
+	}	
+	.green{
+		background-color:#6fb936;
+	}
+	.orange {
+		background-color:#f38630;
+	}
+	.grey {
+		background-color:#989898;
+	}
+</style>
+</head>
+<body>
+	<div class="box green"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	var myTween = new TweenMax('.box',3,{x:500});
+	TweenMax.delayedCall(2,myFunction,['参数1','参数2']);
+	function myFunction(p1,p2){
+		console.log('延迟2秒输出'+p1+'和'+p2);
+	}
+</script>
+</html>
+
+<!-- 笔记 
+	TweenMax.delayedCall(delay:Number,callback:Function,params:Array,scope:*,useFrames:Boolean):TweenMax
+	提供一种在设定的时间（或帧）后调用函数的简单方法
+
+	1秒后执行myFunction 并传递两个参数
+	TweenMax.delayedCall(1,myFunction,['params1 value','params2 value'],document,true);
+	function myFunction(params1,params2){
+		console.log(params1+params2+this);
+	}
+
+
+	参数：
+	delay:Number|必填|要延迟的秒数（或帧数，如果设置了useFrames:true）
+	callback:Function|必填|要延迟执行的函数
+	params:Array|否|传递给onComplete函数的参数，以数组的形式传入
+	scope:*|否|函数的作用域，this的指向，默认为空
+	useFrames:Boolean|否|设定延迟的时间模式是基于秒数还是帧数，默认是false:秒	
+-->
