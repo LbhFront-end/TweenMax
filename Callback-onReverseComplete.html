@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>onReverseComplete</title>
+	<style>
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}
+	input{
+		margin-top:30px;
+		display:block;
+	}
+</style>
+</head>
+<body>
+	<div class="box green"></div>
+	<div id="panel"></div>
+	<input type="button" id="reverseBtn" value="返回动画" title="返回">
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+	panel = document.getElementById('panel');
+	var myTween = TweenMax.to(".box", 2, {
+		x:500,
+		repeat:1,
+		yoyo:true,
+		onComplete:function(){
+			panel.innerHTML = '动画完成了';
+		},
+		onReverseComplete:function(){
+			panel.innerHTML = '返回完毕了'
+		}
+	})
+	reverseBtn = document.getElementById('reverseBtn');
+	reverseBtn.onclick = function(){
+		myTween.reverse();
+	}
+</script>
+</html>
+<!-- 笔记 
+	Function：返回初始点时执行
+	onReverseComplete的补充说明
+	yoyo返回原点时不会触发onReverseComplete，因为yoyo只是把repeat反了个方向。
+-->

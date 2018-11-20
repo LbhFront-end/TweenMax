@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>onReverseCompleteScope</title>
+	<style>
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+</style>
+</head>
+<body>
+<div class="box green"></div>
+<div id="panel"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+</html>
+<!-- 笔记 
+	onReverseCompleteScope
+	Object,定义onReverseCompleteScope函数的作用域，即函数内this的指向。
+	TweenMax.to(mc,1,{
+		x:100,
+		onReverseCompleteScope:object,
+	});
+-->
