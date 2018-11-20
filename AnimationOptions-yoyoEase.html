@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>yoyoEase</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}	
+</style>
+</head>
+<body>
+	<p>默认：false</p>
+	<div class="box green"></div>
+	<p>true</p>
+	<div class="box orange"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	new TweenMax('.green',3,{
+		x:500,
+		ease: Bounce.easeOut,
+		repeat:-1,
+		yoyo:true,
+		yoyoEase:Bounce.easeIn,
+	});	
+	new TweenMax('.orange',3,{
+		x:500,
+		ease: Bounce.easeOut,
+		repeat:-1,
+		yoyo:true,
+		yoyoEase:true,
+	});
+</script>
+</html>
+<!-- 笔记 
+	yoyoEase:Ease|Boolean
+	定义动画返回时，缓动效果如何，默认为false,返回时的缓动效果按照前进时的反转
+	例如，动画前行效果ease:Power1.easeOut,回转则是变成了ease:Power1.easeIn.如果设置为true,回转则是与前进相同，为ease:Power1.easeOut.
+	也可以设置为特定的ease效果，例如Power2.easeOut.
+-->
