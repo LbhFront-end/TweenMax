@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>immediateRender</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+.orange {
+    background-color: #f38630;
+}	
+</style>
+</head>
+<body>
+	<div class="box green"></div>
+	<p>橙色块设置了不立即渲染，因此动画开始前没有到达指定位置</p>
+	<div class="box orange"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	TweenMax.from('.green',3,{
+		x:500,
+		delay:3
+	});
+	TweenMax.from('.orange',3,{
+		x:500,
+		delay:3,
+		immediateRender:false
+	});
+
+</script>
+</html>
+<!-- 笔记 
+	immediateRender:Boolean
+	立即渲染，默认false
+	一般来说，TweenMax的运动对象会在下一个渲染周期前（也就是下一帧）被渲染到场景中，除非你设置delay,如果想强制立即渲染，可以把这参数设置为true.另外form方法的运动对象就是立即渲染的（默认为true），如果你不想该运动对象被渲染，可以把这个参数设为false.
+-->
