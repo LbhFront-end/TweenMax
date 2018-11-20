@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>repeatDelay</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+</style>
+</head>
+<body>
+	<div class="box green"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	myTween = new TweenMax('.box',3,{
+		x:400,
+		repeat:-1,
+		repeatDelay:3, // 一次循环后的暂停
+		ease:Power1.easeOut,
+		delay:3, // 一次循环前的暂停
+	});
+
+</script>
+</html>
+<!-- 笔记 
+	repeatDelay:Number
+	每次重复之间的秒数（或帧）。例如，如果repeat是2并且repeatDelay是1，则动画将首先播放，然后在重复之前等待1s，然后再播放，然后再等待一秒再进行最后的重复。
+-->
