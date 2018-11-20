@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>startAt</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+</style>
+</head>
+<body>
+	<div class="box green"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+TweenMax.to('.box',3,{x:500,startAt:{x:200}});//从200开始
+</script>
+</html>
+<!-- 笔记 
+	startAt:Object
+	设置动画属性开始时的值
+	TweenMax.to(mc,2,{x:500,startAt:{x:200}});
+-->
