@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>overwrite</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}	
+</style>
+</head>
+<body>
+	<p>默认模式2，"auto"</p>
+	<div class="box green"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	TweenMax.to('.box',6,{x:700,y:100});
+	TweenMax.to('.box',3,{x:200,overwrite:2});
+
+</script>
+</html>
+<!-- 笔记 
+	overwrite:String(or int)
+	用来控制同一个对象上有多个动画时覆盖之类的情况
+	TweenMax.to('.box',6,{x:700,y:100});
+	TweenMax.to('.box',6,{x:700,overwrite:'none'});
+	TweenMax.to('.box',6,{x:700,overwrite:0});
+
+	overwrite 的参数：
+	模式|模式代码|说明|效果
+
+	0|"none"或者false|不做任何处理|前三秒运行x:200,y:100 后三秒运行x:700,y:100
+	1|"all"或者"true"|覆盖所有|只运行x:200
+	2|"auto"|仅覆盖重复的属性（默认模式）|前三秒运行x:200,y:100 后三秒运行y:100
+	3|"concurrent"|同时发生|跟模式1很相似，不同的是它覆盖掉正在运行的动画属性。而放过其他的没有启动的动画属性
+	4|"allOnStart"|开始是覆盖|跟模式1非常像。两点不同是他是在动画属性第一次渲染时才覆盖掉其他所有的动画属性，而且这个会把在他之后创建的动画属性也覆盖掉。
+	5|"preexisting"||在动画属性第一次渲染时才覆盖掉其他所有的动画属性
+-->
