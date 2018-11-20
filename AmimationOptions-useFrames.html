@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>useFrames</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}	
+</style>
+</head>
+<body>
+	<div class="box green"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	TweenMax.ticker.fps(100);
+	TweenMax.to('.box',24,{x:500,useFrames:true});
+	// TweenMax.to('.box',3,{x:200,overwrite:2});
+
+</script>
+</html>
+<!-- 笔记 
+	useFrames:Boolean
+	当设置为true时，对这个TweenMax对象的时间计算方式基于帧而不是秒
+	TweenMax.to(obj,100,{x:500,useFrames:true,});
+	useFrames的补充说明
+	一个动画的时间模式通常是由其父时间轴决定的，可通过TweenMax.fps(10);设置帧速。帧速不能超过60
+-->
