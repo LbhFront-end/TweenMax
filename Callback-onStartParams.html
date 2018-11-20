@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>onStartParams</title>
+	<style>
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+</style>
+</head>
+<body>
+<div class="box green"></div>
+<div id="panel"></div>
+<br>
+<input type="button" id="restartBtn" value="restart()" title="重新播放">
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+panel = document.getElementById('panel');
+i = 1;
+var myTween = TweenMax.to(".box", 2, {
+	x:500,
+	repeat:1,
+	yoyo:true,
+	onStartParams:['{self}','param2 value'],
+	onStart:function(p1,p2){
+		panel.innerHTML = '动画开始了第'+ i+'次';
+		i++;
+		console.log(p1);
+		console.log(p2);
+	},
+	onComplete:function(){
+		panel.innerHTML = '动画完成了';
+	}
+})
+restartBtn = document.getElementById('restartBtn');
+restartBtn.onclick = function(){
+	myTween.restart();
+}
+</script>
+</html>
+<!-- 笔记 
+	Array，传递给onStart回调函数的参数数组，例如
+	 TweenMax.to(mc, 1, {
+	    x:100, 
+	    onStart:myFunction, 
+	    onStartParams:[mc, "param2"]
+	});
+	如果想传递动画对象本身，可以使用{self}
+	onStartParams:["{self}", "param2"]
+-->
