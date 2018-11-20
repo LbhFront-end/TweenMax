@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>delay</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+</style>
+</head>
+<body>
+	<div class="box green"></div>
+	<p>延迟三秒开始动画</p>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	new TweenMax('.box',3,{
+		x:500,
+		delay:3
+	});
+	time = {score:3}
+	TweenMax.to(time,3,{
+		score:0,
+		ease:Power0.easeNone,
+		onUpdate:function(){
+			console.log(time.score);
+			document.querySelector('.box').innerHTML = Math.ceil(time.score);
+		}
+	});
+</script>
+</html>
+<!-- 笔记 
+	delay:Number
+	delay:动画开始之前的延迟秒数（以帧为单位时则为帧数）
+-->
