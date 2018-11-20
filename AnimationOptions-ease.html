@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ease</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+</style>
+</head>
+<body>
+	<div class="box green"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	new TweenMax('.box',3,{
+		x:500,
+		ease:Back.easeOut.config(1.7)
+	});
+	// time = {score:3}
+	// TweenMax.to(time,3,{
+	// 	score:0,
+	// 	ease:Power0.easeNone,
+	// 	onUpdate:function(){
+	// 		console.log(time.score);
+	// 		document.querySelector('.box').innerHTML = Math.ceil(time.score);
+	// 	}
+	// });
+</script>
+</html>
+<!-- 笔记 
+	ease:Ease(or Function or String)
+	过渡效果的速度曲线（缓动效果）。可以在动画的参数中设置各种缓动来控制动画的变化率，赋予其特定的“感觉”。例如Elastic.easeOut或 Strong.easeInOut。默认是Power1.easeOut。
+
+	new TweenMax('.box',3,{
+		x:500,
+		ease:Bounce.easeOut
+	});
+
+	TweenLite 包含了基本的缓动：Power0-4/Linear/Quad/Cubic/Quart/Quint/Strong，他们每个都含.easeIn/.easeOut/.easeInOut参数（对于线性动画，请使用Power0.easeNone）。
+	而在TweenMax 在此基础上海另外增加了特殊缓动：Elastic,Back,Bounce,SlowMo,SteppedEase,RoughEase,Circ,Expo,Sine
+	如果想在TweenLite中使用特殊缓动则需要加载缓动类easing/EasePack.min.js 。
+
+	ease 的补充说明
+	此外，缓动效果还可以想Jqury 那样写，easeOutStrong 等同于 Strong.easeOut
+	在TweenMaX2.0,Power0取代了Linear，Power1取代了Quad，Power2取代了Cubic，Power3取代了Quart，Power4取代了Quint/Strong。
+
+	Back还可设定强度，如ease: Back.easeOut.config(1.7)
+	Elastic还可设定强度，如ease: Elastic.easeOut.config(1, 0.3)
+	SlowMo还可设定强度，如ease: SlowMo.ease.config(0.7, 0.7, false)
+	SteppedEase还可设定阶数，如ease: SteppedEase.config(12)
+	RoughEase还需要设定其他参数
+-->
