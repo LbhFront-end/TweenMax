@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>onUpdate</title>
+	<style>
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+</style>
+</head>
+<body>
+<div class="box green"></div>
+<div>动画进行时间：<span  id="time">0</span>秒</div>
+<div id="panel"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+
+var panel = document.getElementById('panel'),
+timeView = document.getElementById('time');
+var myTween = TweenMax.to(".box", 2, {
+	x:500,
+	repeat:-1,
+	yoyo:true,
+	delay:1,
+	repeatDelay:3,
+	onComplete:function(){
+		panel.innerHTML = '动画完成了';
+	},
+	onUpdate:function(){
+		timeView.innerHTML = this.time().toFixed(2);
+	}
+})
+</script>
+</html>
+<!-- 笔记 
+	Function：当属性值发生改变时（动画进行中的每一帧）不停的触发此方法
+	TweenMax.to('.box', 3, {
+    x: 500,
+    onUpdate:function(){
+        ...
+    }
+    onUpdate的补充说明
+	delay时不会触发，repeatDelay时会触发。
+});
+-->
