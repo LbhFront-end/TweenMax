@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lazy</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+</style>
+</head>
+<body>
+	<p>看注释</p>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+
+</script>
+</html>
+<!-- 笔记 
+	lazy:Boolean
+	延迟渲染
+	当动画第一次渲染并读取其起始值时，将默认自动“延迟渲染”该特定瞬间，这意味着它将尝试延迟渲染（写入值）知道最后时间点。中可以提高性能，因为它避免了某些浏览器所做的读/写/读/写布局颠簸。
+	如果要为特定补间禁用延迟渲染，可以设置lazy:false.或者由于零持续时间的补间默认情况下不进行渲染，因为可以通过设置lazy:true等方式为其提供延迟渲染的权限 TweenLite.set(element,{opacity:0,lazy:true}); 
+	在大多情况下，不会需要设置lazy
+	TweenLite.set(element, {opacity:0, lazy:true});
+-->
