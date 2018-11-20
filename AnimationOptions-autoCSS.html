@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>autoCSS</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+</style>
+</head>
+<body>
+	<div class="box green"></div>
+	<br>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<!-- <script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script>  -->
+<script>
+	myTween = new TweenMax('.box',3,{
+		autoCss:false,
+		ease:Power1.easeOut,
+		css:{
+			x:500,
+			alpha:0.3,
+		}
+	});
+
+</script>
+</html>
+<!-- 笔记 
+	autoCSS:Boolean
+	自动识别CSS属性，省略css：{}包装器。默认true
+	当你为DOM元素添加css属性动画时，需要使用CSSPlugin。通常你需要杂一个css:{}对象中包装css相关属性，例如
+	TweenLite.to(element,2,{css: {left:'200px', top: '100px'},ease:Linear.easeNone });
+
+	但是CSS属性动画经常会用到，因为TweenMax在内部实现了一些逻辑简便了这种方法，允许你省略css:{}包装器，上面的补间可以重写TweenLite.to(element,2,{left:'200px',top:'100px',ease:Linear.easeNone});
+
+	也就是说，autoCSS为开启状态时
+	x:500,alpha:0.3
+	等同于
+	css:{
+	  x:500,
+	  alpha:0.3,
+	}
+	要阻止TweenMax自动为你创建css包装器，只需设置autoCSS:false即可。不过这很少会用到，但如果你怀疑TweenMax将某些属性解释为与css无关的属性，请尝试设置autoCSS:false或手动定义你自己的css:{}对象
+
+	autoCSS的补充说明
+	TweenMax自身带有CSSPlugin，而TweenLite需要另外加载文件CSSPlugin.min.js才可以使用CSS动画。
+-->
