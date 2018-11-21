@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>seek</title>
+	<style>
+	body{
+		background-color: #f8f8f8;
+		font-size: 16px;
+	}
+	#demo{
+		width: 580px;
+		height: 80px;
+		background-color: #333;
+		padding: 8px;
+		margin-bottom: 10px;
+	}
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+	input[type="button"] {
+		-webkit-appearance: button;
+		padding: 8px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+	}	
+</style>
+</head>
+<body>
+<div id="demo">
+	<div class="box green"></div>
+</div>
+<input type="button" id="playBtn" value="play()" title="播放">
+<input type="button" id="pauseBtn" value="pause()" title="暂停">
+<input type="button" id="pausedBtn" value="切换播放/暂停状态" title="切换播放/暂停状态">
+<input type="button" id="restartBtn" value="restart()" title="重播">
+<input type="button" id="restartBtnTrue" value="restart(true)" title="重播(true)">
+<input type="button" id="playFromBtn" value="play(5)" title="时间点播放">
+<input type="button" id="pauseFromBtn" value="pause(5)" title="时间点暂停">
+<br>
+<input type="button" id="resumeBtn" value="resume()" title="继续">
+<input type="button" id="resumeFromBtn" value="resume(3)" title="时间点继续">
+<br>
+<input type="button" id="reversedBtn" value="reversed()" title="切换播放方向">
+<input type="button" id="reverseBtn" value="reverse()" title="反向播放">
+<input type="button" id="reverseBtn1" value="reverse(1)" title="时间点反向播放(1)">
+<input type="button" id="reverseBtn_1" value="reverse(-1)" title="时间点反向播放(-1)">
+<input type="button" id="reverseBtn0" value="reverse(0)" title="0时间点反向播放(0)">
+<br>
+<input type="button" id="seekBtn" value="seek(3)" title="时间点播放/返回">
+<input type="button" id="timeScaleSlowBtn" value="timeScale(0.5)" title="减速">
+<input type="button" id="timeScaleNormalBtn" value="timeScale(1)" title="原速">
+<input type="button" id="timeScaleFastBtn" value="timeScale(2)" title="加速">
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+	var playBtn = document.getElementById('playBtn'),
+	pauseBtn = document.getElementById('pauseBtn'),
+	restartBtn = document.getElementById('restartBtn'),
+	restartBtnTrue = document.getElementById('restartBtnTrue'),
+	pausedBtn = document.getElementById('pausedBtn'),
+	playFromBtn = document.getElementById('playFromBtn'),
+	pauseFromBtn = document.getElementById('pauseFromBtn'),
+	resumeBtn = document.getElementById('resumeBtn'),
+	resumeFromBtn = document.getElementById('resumeFromBtn'),
+	reverseBtn = document.getElementById('reverseBtn'),
+	reverseBtn1 = document.getElementById('reverseBtn1'),
+	reverseBtn_1 = document.getElementById('reverseBtn_1'),
+	reverseBtn0 = document.getElementById('reverseBtn0'),
+	reversedBtn = document.getElementById('reversedBtn'),
+	seekBtn = document.getElementById('seekBtn'),
+	timeScaleSlowBtn = document.getElementById('timeScaleSlowBtn'),
+	timeScaleNormalBtn = document.getElementById('timeScaleNormalBtn'),
+	timeScaleFastBtn = document.getElementById('timeScaleFastBtn'),
+	tween = TweenMax.to('.box',6,{
+		x:'500px',
+		ease:Linear.easeNone,
+		paused:true
+	});
+	playBtn.onclick = function(){
+		tween.play();
+	}	
+	playFromBtn.onclick = function(){
+		tween.play(5);
+	}	
+	pauseBtn.onclick = function(){
+		tween.pause();
+	}	
+	pauseFromBtn.onclick = function(){
+		tween.pause(5);
+	}	
+	pausedBtn.onclick = function(){
+		tween.paused(!tween.paused());
+	}	
+	restartBtn.onclick = function(){
+		tween.restart();
+	}	
+	restartBtnTrue.onclick = function(){
+		tween.restart(true);
+	}	
+	resumeBtn.onclick = function(){
+		tween.resume();
+	}	
+	resumeFromBtn.onclick = function(){
+		tween.resume(3);
+	}	
+	reverseBtn.onclick = function(){
+		tween.reverse();
+	}	
+	reverseBtn1.onclick = function(){
+		tween.reverse(1);
+	}	
+	reverseBtn_1.onclick = function(){
+		tween.reverse(-1);
+	}	
+	reverseBtn0.onclick = function(){
+		tween.reverse(0);
+	}	
+	reversedBtn.onclick = function(){
+		tween.reversed(!tween.reversed());
+	}	
+	seekBtn.onclick = function(){
+		tween.seek(3);
+	}	
+	timeScaleSlowBtn.onclick = function(){
+		tween.timeScale(0.5);
+	}	
+	timeScaleNormalBtn.onclick = function(){
+		tween.timeScale(1);
+	}	
+	timeScaleFastBtn.onclick = function(){
+		tween.timeScale(2);
+	}
+</script>
+</html>
+<!-- 笔记 
+	.seek(time:*,suppressEvent):*
+	不改变状态（播放、暂停、方向）的情况下直接跳到某个时间点
+	// 跳转到第2秒
+	myAnimation.seek(2); 
+	//跳转到第2秒，并且不阻止期间的函数、事件
+	myAnimation.seek(2,false) // 切换方向
+
+	返回self,方便链式设置
+
+	参数：
+	time:Number/label|是|省略参数返回当前反方向状态（getter），而定义参数则设置值（setter）并返回实例本身以便于链式设置
+	suppressEvents:Boolean|否|如果true（默认值），当播放头移动到time参数中定义的新位置时，不会触发任何事件或回调。
+
+	input#playBtn[type='button'][value='play()'][title='播放']
+-->
