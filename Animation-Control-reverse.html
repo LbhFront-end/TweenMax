@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>reverse</title>
+	<style>
+	body{
+		background-color: #f8f8f8;
+		font-size: 16px;
+	}
+	#demo{
+		width: 580px;
+		height: 80px;
+		background-color: #333;
+		padding: 8px;
+		margin-bottom: 10px;
+	}
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+	input[type="button"] {
+		-webkit-appearance: button;
+		padding: 8px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+	}	
+</style>
+</head>
+<body>
+<div id="demo">
+	<div class="box green"></div>
+</div>
+<input type="button" id="playBtn" value="play()" title="播放">
+<input type="button" id="pauseBtn" value="pause()" title="暂停">
+<input type="button" id="pausedBtn" value="切换播放/暂停状态" title="切换播放/暂停状态">
+<input type="button" id="restartBtn" value="restart()" title="重播">
+<input type="button" id="restartBtnTrue" value="restart(true)" title="重播(true)">
+<input type="button" id="playFromBtn" value="play(5)" title="时间点播放">
+<input type="button" id="pauseFromBtn" value="pause(5)" title="时间点暂停">
+<br>
+<input type="button" id="resumeBtn" value="resume()" title="继续">
+<input type="button" id="resumeFromBtn" value="resume(3)" title="时间点继续">
+<br>
+<input type="button" id="reverseBtn" value="reverse()" title="反向播放">
+<input type="button" id="reverseBtn1" value="reverse(1)" title="时间点反向播放(1)">
+<input type="button" id="reverseBtn_1" value="reverse(-1)" title="时间点反向播放(-1)">
+<input type="button" id="reverseBtn0" value="reverse(0)" title="0时间点反向播放(0)">
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+	var playBtn = document.getElementById('playBtn'),
+	pauseBtn = document.getElementById('pauseBtn'),
+	restartBtn = document.getElementById('restartBtn'),
+	restartBtnTrue = document.getElementById('restartBtnTrue'),
+	pausedBtn = document.getElementById('pausedBtn'),
+	playFromBtn = document.getElementById('playFromBtn'),
+	pauseFromBtn = document.getElementById('pauseFromBtn'),
+	resumeBtn = document.getElementById('resumeBtn'),
+	resumeFromBtn = document.getElementById('resumeFromBtn'),
+	reverseBtn = document.getElementById('reverseBtn'),
+	reverseBtn1 = document.getElementById('reverseBtn1'),
+	reverseBtn_1 = document.getElementById('reverseBtn_1'),
+	reverseBtn0 = document.getElementById('reverseBtn0'),
+	tween = TweenMax.to('.box',6,{
+		x:'500px',
+		ease:Linear.easeNone,
+		paused:true
+	});
+	playBtn.onclick = function(){
+		tween.play();
+	}	
+	playFromBtn.onclick = function(){
+		tween.play(5);
+	}	
+	pauseBtn.onclick = function(){
+		tween.pause();
+	}	
+	pauseFromBtn.onclick = function(){
+		tween.pause(5);
+	}	
+	pausedBtn.onclick = function(){
+		tween.paused(!tween.paused());
+	}	
+	restartBtn.onclick = function(){
+		tween.restart();
+	}	
+	restartBtnTrue.onclick = function(){
+		tween.restart(true);
+	}	
+	resumeBtn.onclick = function(){
+		tween.resume();
+	}	
+	resumeFromBtn.onclick = function(){
+		tween.resume(3);
+	}	
+	reverseBtn.onclick = function(){
+		tween.reverse();
+	}	
+	reverseBtn1.onclick = function(){
+		tween.reverse(1);
+	}	
+	reverseBtn_1.onclick = function(){
+		tween.reverse(-1);
+	}	
+	reverseBtn0.onclick = function(){
+		tween.reverse(0);
+	}
+</script>
+</html>
+<!-- 笔记 
+	.reverse(from:*,suppressEvent:Boolean):*
+	控制播放反向播放。动画的各种表现都会反转。例如ease
+	// 当前位置反向播放
+	myAnimation.reverse();
+	//2秒位置反向播放
+	myAnimation.reverse(2);	
+	//2秒位置反向播放，并且不抑制事件触发
+	myAnimation.reverse(2,false);
+	// 动画末端方向播放
+	myAnimation.reverse(0)
+	// 动画末端往回1秒位置反向播放
+	myAnimation.reverse(-1)
+	// 切换位置（如果它是前进方向，则反向播放。如果是反向的，则向前播放）
+	if(myAnimation.reversed()){
+		myAnimation.play();
+	}else{
+		myAnimation.reverse();
+	}
+	返回self,方便链式设置
+
+	参数：
+	from:Number/label|否|动画反向播放前跳转到的时间（或TimelineLite/TimelineMax的label）如果没有定义，它将从播放头当前的位置开始反向播放。如果从最动画最末端开始播放，设置为0。如果时间基于反方向，可以设置为负数，如.reverse(-1)
+	suppressEvents:Boolean|否|如果true(默认值)，当播放头移动到from参数中定义的新位置时，不会触发任何事件或回调。
+
+	input#playBtn[type='button'][value='play()'][title='播放']
+-->
