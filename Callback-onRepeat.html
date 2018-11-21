@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>onRepeat</title>
+	<style>
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+</style>
+</head>
+<body>
+<div class="box green"></div>
+<div>重复次数<span id="num">0</span></div>
+<div>动画进行时间：<span  id="time">0</span>秒</div>
+<div id="panel"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+
+var panel = document.getElementById('panel'),
+timeView = document.getElementById('time'),
+num = document.getElementById('num'),
+count = 1;
+var myTween = TweenMax.to(".box", 2, {
+	x:500,
+	repeat:-1,
+	yoyo:true,
+	delay:1,
+	repeatDelay:3,
+	onComplete:function(){
+		panel.innerHTML = '动画完成了';
+	},
+	onUpdate:function(){
+		timeView.innerHTML = this.time().toFixed(2);
+	},
+	onRepeat:function(){
+		num.innerHTML = count;
+		count++;
+	}
+
+})
+</script>
+</html>
+<!-- 笔记 
+	Function，在每次动画重复时(repeat)执行。
+
+	TweenMax.to('.box', 2, {
+	    x: 500,
+	    repeat:1,
+	    onRepeat:function(){
+	        ...
+	    }
+	});
+});
+-->
