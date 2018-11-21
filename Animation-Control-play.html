@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>play</title>
+	<style>
+	body{
+		background-color: #f8f8f8;
+		font-size: 16px;
+	}
+	#demo{
+		width: 550px;
+		height: 80px;
+		background-color: #333;
+		padding: 8px;
+		margin-bottom: 10px;
+	}
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+	input[type="button"] {
+		-webkit-appearance: button;
+		padding: 8px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+	}	
+</style>
+</head>
+<body>
+<div id="demo">
+	<div class="box green"></div>
+</div>
+<input type="button" id="playBtn" value="play()" title="播放">
+<input type="button" id="playFromBtn" value="play(5)" title="时间点播放">
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+	var playBtn = document.getElementById('playBtn'),
+	playFromBtn = document.getElementById('playFromBtn'),
+	tween = TweenMax.to('.box',6,{
+		x:'500px',
+		ease:Linear.easeNone
+	});
+	playBtn.onclick = function(){
+		tween.play();
+	}	
+	playFromBtn.onclick = function(){
+		tween.play(5);
+	}
+</script>
+</html>
+<!-- 笔记 
+	.play(from:*,suppressEvents:Boolean):*
+	控制动画往正方向播放，可设定开始的时间点
+	如果suppressEvent 保持默认状态并跳到新的时间点，那么之前在新旧时间点之间设置的回调函数不会被触发，相当于跳过了那些时间点，如果想要触发，设为false
+	//在当前位置开始播放
+	myAnimation.play();
+	// 在2秒钟位置开始播放
+	myAnimation.play(2);
+	// 在2秒钟位置开始播放，并且不阻止期间的函数、事件
+	myAnimation.play(2,false);
+	返回self,方便链式设置，如 tween.play().timeScale()
+
+	参数
+	from:Number/label|否|动画开始播放的时间（或TimelineLite/TimelineMax的label）如果没有定义，它将从播放头当前的位置开始播放
+	suppressEvents：Boolean|否|如果true（默认值），当播放头移动到from参数中定义的新位置时，不会触发任何事件或回调。
+
+	input#playBtn[type='button'][value='play()'][title='播放']
+-->
