@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>reversed</title>
+	<style>
+	body{
+		background-color: #f8f8f8;
+		font-size: 16px;
+	}
+	#demo{
+		width: 580px;
+		height: 80px;
+		background-color: #333;
+		padding: 8px;
+		margin-bottom: 10px;
+	}
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+	input[type="button"] {
+		-webkit-appearance: button;
+		padding: 8px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+	}	
+</style>
+</head>
+<body>
+<div id="demo">
+	<div class="box green"></div>
+</div>
+<input type="button" id="playBtn" value="play()" title="播放">
+<input type="button" id="pauseBtn" value="pause()" title="暂停">
+<input type="button" id="pausedBtn" value="切换播放/暂停状态" title="切换播放/暂停状态">
+<input type="button" id="restartBtn" value="restart()" title="重播">
+<input type="button" id="restartBtnTrue" value="restart(true)" title="重播(true)">
+<input type="button" id="playFromBtn" value="play(5)" title="时间点播放">
+<input type="button" id="pauseFromBtn" value="pause(5)" title="时间点暂停">
+<br>
+<input type="button" id="resumeBtn" value="resume()" title="继续">
+<input type="button" id="resumeFromBtn" value="resume(3)" title="时间点继续">
+<br>
+<input type="button" id="reversedBtn" value="reversed()" title="切换播放方向">
+<input type="button" id="reverseBtn" value="reverse()" title="反向播放">
+<input type="button" id="reverseBtn1" value="reverse(1)" title="时间点反向播放(1)">
+<input type="button" id="reverseBtn_1" value="reverse(-1)" title="时间点反向播放(-1)">
+<input type="button" id="reverseBtn0" value="reverse(0)" title="0时间点反向播放(0)">
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+	var playBtn = document.getElementById('playBtn'),
+	pauseBtn = document.getElementById('pauseBtn'),
+	restartBtn = document.getElementById('restartBtn'),
+	restartBtnTrue = document.getElementById('restartBtnTrue'),
+	pausedBtn = document.getElementById('pausedBtn'),
+	playFromBtn = document.getElementById('playFromBtn'),
+	pauseFromBtn = document.getElementById('pauseFromBtn'),
+	resumeBtn = document.getElementById('resumeBtn'),
+	resumeFromBtn = document.getElementById('resumeFromBtn'),
+	reverseBtn = document.getElementById('reverseBtn'),
+	reverseBtn1 = document.getElementById('reverseBtn1'),
+	reverseBtn_1 = document.getElementById('reverseBtn_1'),
+	reverseBtn0 = document.getElementById('reverseBtn0'),
+	reversedBtn = document.getElementById('reversedBtn'),
+	tween = TweenMax.to('.box',6,{
+		x:'500px',
+		ease:Linear.easeNone,
+		paused:true
+	});
+	playBtn.onclick = function(){
+		tween.play();
+	}	
+	playFromBtn.onclick = function(){
+		tween.play(5);
+	}	
+	pauseBtn.onclick = function(){
+		tween.pause();
+	}	
+	pauseFromBtn.onclick = function(){
+		tween.pause(5);
+	}	
+	pausedBtn.onclick = function(){
+		tween.paused(!tween.paused());
+	}	
+	restartBtn.onclick = function(){
+		tween.restart();
+	}	
+	restartBtnTrue.onclick = function(){
+		tween.restart(true);
+	}	
+	resumeBtn.onclick = function(){
+		tween.resume();
+	}	
+	resumeFromBtn.onclick = function(){
+		tween.resume(3);
+	}	
+	reverseBtn.onclick = function(){
+		tween.reverse();
+	}	
+	reverseBtn1.onclick = function(){
+		tween.reverse(1);
+	}	
+	reverseBtn_1.onclick = function(){
+		tween.reverse(-1);
+	}	
+	reverseBtn0.onclick = function(){
+		tween.reverse(0);
+	}	
+	reversedBtn.onclick = function(){
+		tween.reversed(!tween.reversed());
+	}
+</script>
+</html>
+<!-- 笔记 
+	.reversed(value:Boolean):*
+	获取或设置动画的反转状态，指示是否应该反向播放动画
+	var rev = myAnimation.reversed(); // 获取反方向状态
+	myAnimation.reversed(true); // 设置反方向
+	myAnimation.reversed(!myAnimation.reversed()) // 切换方向
+
+	返回self,方便链式设置
+
+	参数：
+	value:Boolean|否|省略参数返回当前反方向状态（getter），而定义参数则设置值（setter）并返回实例本身以便于链式设置
+
+	.reversed()的补充说明
+	向状态不受yoyo影响，即yoyo返回时，仍然属于正向播放。
+	
+	input#playBtn[type='button'][value='play()'][title='播放']
+-->
