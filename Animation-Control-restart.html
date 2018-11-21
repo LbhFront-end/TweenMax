@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>restart</title>
+	<style>
+	body{
+		background-color: #f8f8f8;
+		font-size: 16px;
+	}
+	#demo{
+		width: 580px;
+		height: 80px;
+		background-color: #333;
+		padding: 8px;
+		margin-bottom: 10px;
+	}
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+	input[type="button"] {
+		-webkit-appearance: button;
+		padding: 8px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+	}	
+</style>
+</head>
+<body>
+<div id="demo">
+	<div class="box green"></div>
+</div>
+<input type="button" id="playBtn" value="play()" title="播放">
+<input type="button" id="pauseBtn" value="pause()" title="暂停">
+<input type="button" id="pausedBtn" value="切换播放/暂停状态" title="切换播放/暂停状态">
+<input type="button" id="restartBtn" value="restart()" title="重播">
+<input type="button" id="restartBtnTrue" value="restart(true)" title="重播(true)">
+<input type="button" id="playFromBtn" value="play(5)" title="时间点播放">
+<input type="button" id="pauseFromBtn" value="pause(5)" title="时间点暂停">
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+	var playBtn = document.getElementById('playBtn'),
+	pauseBtn = document.getElementById('pauseBtn'),
+	restartBtn = document.getElementById('restartBtn'),
+	restartBtnTrue = document.getElementById('restartBtnTrue'),
+	pausedBtn = document.getElementById('pausedBtn'),
+	playFromBtn = document.getElementById('playFromBtn'),
+	pauseFromBtn = document.getElementById('pauseFromBtn'),
+	tween = TweenMax.to('.box',6,{
+		x:'500px',
+		ease:Linear.easeNone,
+		paused:true
+	});
+	playBtn.onclick = function(){
+		tween.play();
+	}	
+	playFromBtn.onclick = function(){
+		tween.play(5);
+	}	
+	pauseBtn.onclick = function(){
+		tween.pause();
+	}	
+	pauseFromBtn.onclick = function(){
+		tween.pause(5);
+	}	
+	pausedBtn.onclick = function(){
+		tween.paused(!tween.paused());
+	}	
+	restartBtn.onclick = function(){
+		tween.restart();
+	}	
+	restartBtnTrue.onclick = function(){
+		tween.restart(true);
+	}
+</script>
+</html>
+<!-- 笔记 
+	.restart(includeDelay:Boolean,suppressEvent:Boolean):*
+	重新开始动画/重头开始
+	// 略去delay马上重新开始
+	myAnimation.restart();
+	//包含delay重新开始，并且不抑制事件触发
+	myAnimation.restart(true,false);
+	返回self,方便链式设置
+
+	参数：
+	includeDelay:Boolean|否|设置重新开始动画是否包含延迟（如果有），例如动画new TweenLite.to(mc,2,{x:100,delay:1})
+	当重新restart（） ,会略过delay马上开始，如果是restart(true)，则会有1秒的延迟，默认false
+	suppressEvents:Boolean|否|如果true(默认值)，当播放头移动到新位置时，不会触发任何事件或回调。
+
+	input#playBtn[type='button'][value='play()'][title='播放']
+-->
