@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>paused</title>
+	<style>
+	body{
+		background-color: #f8f8f8;
+		font-size: 16px;
+	}
+	#demo{
+		width: 550px;
+		height: 80px;
+		background-color: #333;
+		padding: 8px;
+		margin-bottom: 10px;
+	}
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+	input[type="button"] {
+		-webkit-appearance: button;
+		padding: 8px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+	}	
+</style>
+</head>
+<body>
+<div id="demo">
+	<div class="box green"></div>
+</div>
+<input type="button" id="playBtn" value="play()" title="播放">
+<input type="button" id="pauseBtn" value="pause()" title="暂停">
+<input type="button" id="pausedBtn" value="切换播放/暂停状态" title="切换播放/暂停状态">
+<input type="button" id="playFromBtn" value="play(5)" title="时间点播放">
+<input type="button" id="pauseFromBtn" value="pause(5)" title="时间点暂停">
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+	var playBtn = document.getElementById('playBtn'),
+	pauseBtn = document.getElementById('pauseBtn'),
+	pausedBtn = document.getElementById('pausedBtn'),
+	playFromBtn = document.getElementById('playFromBtn'),
+	pauseFromBtn = document.getElementById('pauseFromBtn'),
+	tween = TweenMax.to('.box',6,{
+		x:'500px',
+		ease:Linear.easeNone,
+		paused:true
+	});
+	playBtn.onclick = function(){
+		tween.play();
+	}	
+	playFromBtn.onclick = function(){
+		tween.play(5);
+	}	
+	pauseBtn.onclick = function(){
+		tween.pause();
+	}	
+	pauseFromBtn.onclick = function(){
+		tween.pause(5);
+	}	
+	pausedBtn.onclick = function(){
+		tween.paused(!tween.paused());
+	}
+</script>
+</html>
+<!-- 笔记 
+	.pause(value:Boolean):*
+	获取或设置动画的暂停状态，该状态知识动画当前是否已暂停
+	var paused = myAnimation.paused(); // 获取暂停状态
+	myAnimation.paused(true); // 设置暂停状态（类似pause()）
+	myAnimation.paused(!myAnimation()) // 切换暂停/非暂停状态
+
+	返回值
+	省略参数会返回当前值（getter）,而定义参数会设置值（setter）并返回实例本身以便于链接、
+	例如：myAnimation.paused(true).delay(2).timeScale(0.5);
+	参数
+	value:Boolean|否|省略参数返回当前值（getter），而定义参数则设置值（setter）并返回实例本身以便于链式设置
+
+	.paused()的补充说明
+	动画播放完成时，不会变成暂停状态。
+
+	input#playBtn[type='button'][value='play()'][title='播放']
+-->
