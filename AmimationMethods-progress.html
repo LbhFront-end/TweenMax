@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>progress</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	#stats{
+		line-height:2;
+		margin-top:1em;
+	}	
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}	
+</style>
+</head>
+<body>	
+	<div class="box green"></div>
+	<div id="stats">
+		<div>duration:<span id="duration">0</span>单次动画的时间</div>
+		<div>totalDuration:<span id="totalDuration">0</span>整个动画的时间</div>
+		<div>time:单次动画进行时间<span id="time">0</span>秒</div>
+		<div>totalTime:整个动画进行时间<span id="totalTime">0</span>秒</div>
+		<div>progress:单次动画进程<span id="progress">0</span></div>
+	</div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	var duration = document.getElementById('duration'),
+	time = document.getElementById('time'),
+	totalTime = document.getElementById('totalTime'),
+	progress = document.getElementById('progress'),
+	totalDuration = document.getElementById('totalDuration');
+	var myTween = new TweenMax('.box',3,{
+		x:500,
+		repeat:3,
+		repeatDelay:2,
+		onUpdate:updateStats,
+		// onRepeat:updateReps,
+	});
+	function updateStats(){
+		this.progress(0.4);
+		time.innerHTML = this.time().toFixed(2);
+		totalTime.innerHTML = this.totalTime().toFixed(2);
+		progress.innerHTML = this.progress().toFixed(2);
+	}
+	function reset(){
+		reps = 0;
+		duration.innerHTML = myTween.duration().toFixed(2);
+		totalDuration.innerHTML = myTween.totalDuration().toFixed(2);		
+	}
+	reset();
+
+</script>
+</html>
+<!-- 笔记 
+	.progress:(value:Number,suppressEvents:Boolean):*
+	获取或设置单次动画的进程(从0到1)
+	var progress = myTween.progress(); // 获取单次动画进程
+	myTween.progress(0.25); // 设置单次动画进程		
+-->
