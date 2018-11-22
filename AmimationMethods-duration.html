@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>duration</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	#stats{
+		line-height:2;
+		margin-top:1em;
+	}	
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}	
+</style>
+</head>
+<body>	
+	<div class="box green"></div>
+	<div id="stats">
+		<div>duration:<span id="duration">0</span>单次动画的时间</div>
+	</div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	var duration = document.getElementById('duration');
+	var myTween = new TweenMax('.box',3,{
+		x:500,
+		repeat:3,
+		repeatDelay:2,
+		// onUpdate:updateStats,
+		// onRepeat:updateReps,
+	});
+	function reset(){
+		reps = 0;
+		duration.innerHTML = myTween.duration().toFixed(2);
+	}
+	reset();
+
+</script>
+</html>
+<!-- 笔记 
+	.duration:(value:Number):*
+	获取或设置动画持续时间
+	var currentDuration = myAnimation.duration(); // 获取当前动画的持续时间
+	myAnimation.duration(2); // 设置2秒的持续时间
+	属性链式写法
+	myAnimation.duration(2).repeat(3).timeScale(2).play(0.5)
+
+-->
