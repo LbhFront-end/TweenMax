@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ticker</title>
+	<style>
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+</style>
+</head>
+<body>
+<div class="box green"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	myTween = new TweenMax('.box',3,{
+		x:500
+	});
+	myTween.data = { var1: 'value1', var2: 'value2' }
+	console.log(myTween.target); // NodeList [div.box.green]
+	console.log(myTween.timeline); // NodeList [div.box.green]
+	console.log(myTween.vars); // NodeList [div.box.green]
+
+	TweenMax.ticker.fps(3); //设置帧速率为3，每秒钟触发三次tick监听事件
+	TweenMax.ticker.addEventListener('tick',myFunction,this,false,1);
+	function myFunction(event){
+		console.log(event); //useParam设置为true时产生事件对象，如果设置为false则event为undefined但会提高性能
+	}
+
+</script>
+</html>
+<!-- 笔记 
+	TweenMax.ticker : Object
+	设置核心引擎，每当引擎update时这个对象将分配tick事件，可以添加自己的lisener 来运行自定义逻辑（非常适合游戏开发人员）
+	简约的监听方法
+	// 添加监听
+	TweenMax.ticker.addEventListener('tick',myFunction);
+
+	function myFunction(){
+	// 核心引擎update 时处理这个事件
+	}
+
+	// 移除监听
+	TweenMax.ticker.removeEventListener('tick',myFunction);
+
+	目前主流浏览器都由requestAnimation时间驱动，通常requestAnimantionFrame时间每秒发生约60次，但这取决于浏览器并且还取决于系统性能。如果requestAnimationFrame不支持，则ticker会自动回退到使用setTimeout() 这种所有浏览器都支持的常规模式。
+
+
+	自定义ticker
+	要ticker使用setTimeout()而不是requestAnimationFrame，可以使用useRAF()方法：
+	// 关闭requestAnimationFrame，则切换ticker使用setTimeOut()来替换
+	TweenMax.ticker.useRAF(false);
+
+	如果你还想调整帧速率，可使用fps()方法，帧速率超过60无效
+
+	// 帧速调整为30
+	myTween.ticker.fps(30);
+
+	如果你确实想将帧速调整到100（不推荐），可以先把requestAnimationFrame关闭TweenMax.ticker.useRAF(false)转为setTimeOut()，再设定TweenMax.ticker.fps(100)即可。
+
+	完整的监听方法
+	addEventListener(type,callback,scope,useParam,priority);
+
+	参数说明:
+	type	 String	  是	 监听类型，一般是"tick"
+	callbac  Function 是	 事件触发的函数
+	scope	 Object   否 限定函数的范围，一般是"this"
+	useParam Boolean  否	 如果设置为true每次触发时将产生事件对象，事件对象包含type(一般是"tick")和target，默认是false以提高性能
+	priority Integer  否	 函数调用的优先级，高级的比低级的优先处理
+
+	//添加请求事件对象参数event的侦听器，将范围绑定到当前范围（this），并将优先级设置为1，以便优先处理
+	 TweenMax.ticker.addEventListener("tick", myFunction, this, true, 1);
+	 
+	function myFunction(event) {
+	    //核心引擎update时处理这个事件
+	}
+	 
+	//移除监听
+	 TweenMax.ticker.removeEventListener("tick", myFunction);
+-->
