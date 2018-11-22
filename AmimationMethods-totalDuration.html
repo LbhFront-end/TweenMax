@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>totalDuration</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	#stats{
+		line-height:2;
+		margin-top:1em;
+	}	
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}	
+</style>
+</head>
+<body>	
+	<div class="box green"></div>
+	<div id="stats">
+		<div>duration:<span id="duration">0</span>单次动画的时间</div>
+		<div>totalDuration:<span id="totalDuration">0</span>整个动画的时间</div>
+	</div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	var duration = document.getElementById('duration'),
+	totalDuration = document.getElementById('totalDuration');
+	var myTween = new TweenMax('.box',3,{
+		x:500,
+		repeat:3,
+		repeatDelay:2,
+		// onUpdate:updateStats,
+		// onRepeat:updateReps,
+	});
+	function reset(){
+		reps = 0;
+		duration.innerHTML = myTween.duration().toFixed(2);
+		totalDuration.innerHTML = myTween.totalDuration().toFixed(2);
+	}
+	reset();
+
+</script>
+</html>
+<!-- 笔记 
+	.totalDuration:(value:Number):*
+	获取或设置全部重复的动画持续时间
+	var total = myTween.totalDuration(); // 获取全部动画持续时间
+	myTween.totalDuration(10); 设置全部动画持续时间	
+	当然你改变整体的持续时间的话，单个的动画时间也会跟着改变
+-->
