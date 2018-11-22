@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>repeat</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	#stats{
+		line-height:2;
+		margin-top:1em;
+	}	
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}	
+	input[type="button"] {
+		-webkit-appearance:button;
+		padding:8px;
+		margin-right:5px;
+		margin-bottom: 5px;
+	}	
+</style>
+</head>
+<body>	
+	<div class="box green"></div>
+	<div>
+		<input type="button" id="timeScaleSlowBtn" value="timeScale(0.5)" title="减速">
+		<input type="button" id="timeScaleNormalBtn" value="timeScale(1)" title="原速">
+		<input type="button" id="timeScaleFastBtn" value="timeScale(2)" title="加速">
+	</div>	
+	<div id="stats">
+		<div>duration:<span id="duration">0</span>单次动画的时间</div>
+		<div>totalDuration:<span id="totalDuration">0</span>全部重复动画加重复间隔的持续时间</div>
+		<div>time:单次动画进行时间<span id="time">0</span>秒</div>
+		<div>totalTime:整个动画进行时间<span id="totalTime">0</span>秒</div>
+		<div>progress:单次动画进程<span id="progress">0</span></div>
+		<div>totalProgress:整个动画进程<span id="totalProgress">0</span></div>
+		<div>delay:动画开始延迟<span id="delay">0</span>秒</div>
+		<div>startTime:动画<span id="startTime">0</span>秒后开始</div>
+		<div>endTime:动画结束时间<span id="endTime">0</span>秒</div>
+		<div>repeat:动画重复<span id="repeat">0</span>次</div>
+	</div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	var duration = document.getElementById('duration'),
+	time = document.getElementById('time'),
+	totalTime = document.getElementById('totalTime'),
+	progress = document.getElementById('progress'),
+	totalProgress = document.getElementById('totalProgress'),
+	timeScaleSlowBtn = document.getElementById('timeScaleSlowBtn'),
+	timeScaleNormalBtn = document.getElementById('timeScaleNormalBtn'),
+	timeScaleFastBtn = document.getElementById('timeScaleFastBtn'),
+	timeScaleFastBtn = document.getElementById('timeScaleFastBtn'),
+	endTime = document.getElementById('endTime'),
+	startTime = document.getElementById('startTime'),
+	repeat = document.getElementById('repeat'),
+	totalDuration = document.getElementById('totalDuration');
+	var myTween = new TweenMax('.box',3,{
+		x:500,
+		delay:2,
+		repeat:3,
+		repeatDelay:2,
+		onUpdate:updateStats,
+		// onRepeat:updateReps,
+	});
+	function updateStats(){
+		time.innerHTML = this.time().toFixed(2);
+		totalTime.innerHTML = this.totalTime().toFixed(2);
+		progress.innerHTML = this.progress().toFixed(2);
+		totalProgress.innerHTML = this.totalProgress().toFixed(2);				
+	}
+	function reset(){
+		reps = 0;
+		myTween.startTime(4);
+		startTime.innerHTML = myTween.startTime().toFixed(2);	
+		endTime.innerHTML = myTween.endTime().toFixed(2);	
+		duration.innerHTML = myTween.duration().toFixed(2);
+		totalDuration.innerHTML = myTween.totalDuration().toFixed(2);	
+		delay.innerHTML = myTween.delay().toFixed(2);				
+		repeat.innerHTML = myTween.repeat().toFixed(2);				
+	}
+	timeScaleSlowBtn.onclick = function(){
+		myTween.timeScale(0.5);
+	}	
+	timeScaleNormalBtn.onclick = function(){
+		myTween.timeScale(1);
+	}	
+	timeScaleFastBtn.onclick = function(){
+		myTween.timeScale(2);
+	}
+	reset();
+
+</script>
+</html>
+<!-- 笔记 
+	.repeat:(value:Number ):*
+	获取或者设定动画在第一次完成后的重复次数。
+	var repeat  = myAnimation.repeat(); //获取动画重复次数
+	myTween.repeat(2); // 设置动画重复次数
+
+	当你设置了动画的循环次数，那么之前的很多参数例如动画延迟总时间，以及动画总运动时间都会变化
+-->
