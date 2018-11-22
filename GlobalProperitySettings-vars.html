@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vars</title>
+	<style>
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+</style>
+</head>
+<body>
+<div class="box green"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	myTween = new TweenMax('.box',3,{
+		x:500
+	});
+	myTween.data = { var1: 'value1', var2: 'value2' }
+	console.log(myTween.target); // NodeList [div.box.green]
+	console.log(myTween.timeline); // NodeList [div.box.green]
+	console.log(myTween.vars); // NodeList [div.box.green]
+</script>
+</html>
+<!-- 笔记 
+	.vars : Object
+	一个存储了传递给构造器的配置变量的对象。包含动画选项和回调函数等。例如delay、paused、onComplete
+	}
+-->
