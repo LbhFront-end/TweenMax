@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>timeline</title>
+	<style>
+	.box{
+		width: 50px;
+		height: 50px;
+		border-radius: 5px;
+		margin-top: 4px;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}
+	.grey {
+		background-color: #989898;
+	}	
+</style>
+</head>
+<body>
+<div class="box green"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script> 
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	myTween = new TweenMax('.box',3,{
+		x:500
+	});
+	myTween.data = { var1: 'value1', var2: 'value2' }
+	console.log(myTween.target); // NodeList [div.box.green]
+	console.log(myTween.timeline); // NodeList [div.box.green]
+</script>
+</html>
+<!-- 笔记 
+	获取动画的父级时间轴对象。
+	mytween.timeline
+	每个动画都放在时间轴上（默认为根时间轴），并且只能有一个父时间轴。一个实例不能同时存在于多个时间轴中。
+	}
+-->
