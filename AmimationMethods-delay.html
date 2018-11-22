@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>delay</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	#stats{
+		line-height:2;
+		margin-top:1em;
+	}	
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}	
+	input[type="button"] {
+		-webkit-appearance:button;
+		padding:8px;
+		margin-right:5px;
+		margin-bottom: 5px;
+	}	
+</style>
+</head>
+<body>	
+	<div class="box green"></div>
+	<div id="stats">
+		<div>duration:<span id="duration">0</span>单次动画的时间</div>
+		<div>totalDuration:<span id="totalDuration">0</span>全部重复动画加重复间隔的持续时间</div>
+		<div>time:单次动画进行时间<span id="time">0</span>秒</div>
+		<div>totalTime:整个动画进行时间<span id="totalTime">0</span>秒</div>
+		<div>progress:单次动画进程<span id="progress">0</span></div>
+		<div>totalProgress:整个动画进程<span id="totalProgress">0</span></div>
+		<div>delay:动画开始延迟<span id="delay">0</span>秒</div>
+	</div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	var duration = document.getElementById('duration'),
+	time = document.getElementById('time'),
+	totalTime = document.getElementById('totalTime'),
+	progress = document.getElementById('progress'),
+	totalProgress = document.getElementById('totalProgress'),
+	totalDuration = document.getElementById('totalDuration');
+	var myTween = new TweenMax('.box',3,{
+		x:500,
+		delay:1,
+		repeat:3,
+		repeatDelay:2,
+		onUpdate:updateStats,
+		// onRepeat:updateReps,
+	});
+	function updateStats(){
+		time.innerHTML = this.time().toFixed(2);
+		totalTime.innerHTML = this.totalTime().toFixed(2);
+		progress.innerHTML = this.progress().toFixed(2);
+		totalProgress.innerHTML = this.totalProgress().toFixed(2);		
+	}
+	function reset(){
+		reps = 0;
+		duration.innerHTML = myTween.duration().toFixed(2);
+		totalDuration.innerHTML = myTween.totalDuration().toFixed(2);	
+		delay.innerHTML = myTween.delay().toFixed(2);				
+	}
+	reset();
+
+</script>
+</html>
+<!-- 笔记 
+	.delay:(value:Number):*
+	获取或设置动画的开始延迟秒数（帧）
+	var delay = myTween.delay(); // 获取动画开始延迟的时间
+	myTween.delay(2); // 设置动画开始的延迟		
+-->
