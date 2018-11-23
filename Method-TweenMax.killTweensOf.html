@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TweenMax.killTweensOf</title>
+	<style>
+	.box{
+		width: 100px;
+		height: 100px;
+		border-radius: 5px;
+		margin-top: 4px;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+</style>
+</head>
+<body>
+	<p>看注释</p>
+</body>
+<script src="./js/TweenMax.js"></script> 
+</html>
+<!-- 笔记 
+	TweenMax.killTweensOf( target:Object, vars:Object ) :
+	移除指定对象的所有动画（或特定动画属性）或delayedCall.
+	TweenMax.killTweensOf(myObject);
+	// 清除某个对象的动画（tween）
+
+	TweenMax.killTweensOf(myObject,{opacity:true,x:true});
+	// 清除某个对象的某些属性参数
+
+	参数说明：
+	target:object|是|清除动画的对象或选择文本，也可以传入对象数组
+	vars:Object|否|需要清除的属性参数，如果不设置或设置为null即清除全部属性
+-->
