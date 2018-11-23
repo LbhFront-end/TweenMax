@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>eventCallback</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	#stats{
+		line-height:2;
+		margin-top:1em;
+	}	
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}	
+	input[type="button"] {
+		-webkit-appearance:button;
+		padding:8px;
+		margin-right:5px;
+		margin-bottom: 5px;
+	}	
+</style>
+</head>
+<body>	
+	<p>看注释</p>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+
+</script>
+</html>
+<!-- 笔记 
+	.eventCallback(type:String,callback:Function,params,scope:*):*
+	获取或设置回调，例如"onComplete","onUpdate","onStart","onReverseComplete","onRepeat"(onRepeat只能应用在TweenMax或者TimelineMax实例)，已经传递给该回调的任何参数
+	以下两个设置方式等效		
+	var myAnimation = new TweenLite(mc,1,{x:100,onComplete:myFunction,onCompleteParams:['param1','param2']})
+	myAnimation.eventCallback('onComplete',myFunction,['param1','param2']);
+
+	每个动画实例的每个回调类型只能有一个（一个onComplete,一个onUpdata,一个onStart等等），新建的会覆盖之前的，可以通过设置null来删除掉回调函数
+
+	myAnimation('onUpdate',null);
+	返回值：省略除第一个参数之外的所有参数则返回当前值（getter），而定义多余第一个参数则设置回调（setter）并返回实例本身以便于链式执行，一下就是链式执行的例子
+	myAnimation.eventCallback('onComplete',completeHandle).eventCallback('onUpdate',updateHandler,['param1','{self}']);
+
+	参数：
+	type:String|是|事件回调类型，如"onComplete","onUpdate","onStart"或者"onRapeat"。这是区分大小写
+	callback:Function|否|事件发生时应调用的函数，default = null
+	params:Array|否|传递回调的参数数组，用"{self}"指动画实例本身。例：['param1','{self}'],default = null
+	scope:| |否|回调调用的范围（基本上代表函数中'this'指的是什么），default = null
+-->
