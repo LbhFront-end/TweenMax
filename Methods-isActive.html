@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>isActive</title>
+	<style>
+	body, html {
+		font-family: Signika Negative, sans-serif;
+		background: #111;
+		color:#efefef;
+		height:100%;
+	}
+
+	.wrapper {
+		width:400px;
+		height:100px;
+		background:#444;
+		margin-bottom:10px;
+	}
+
+	.box {
+		width:100px;
+		height:100px;
+		background:#88ce02;
+	}
+
+	button {
+		margin:10px 0;
+		padding:10px;
+	}
+</style>
+</head>
+<body>	
+	<h3>只有在非进行状态下才可以转换动画方向，我们使用isActive()来确保补间在激活时不能改变其方向。</h3>
+	<div class="wrapper">
+		<div class="box"></div>
+	</div>
+	<button class="dark-grey-button club-demo-button" id="tweenBox">toggle tween direction</button> 
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+var endX = 300;
+var tween = TweenMax.to('.box', 2, {x:endX, ease:Linear.easeNone}).reverse();
+
+tweenBox=document.getElementById("tweenBox")
+tweenBox.onclick=function(){
+  if(!tween.isActive()){
+    //only reverse the direction if the tween is not active
+    tween.reversed(!tween.reversed())
+  }
+}
+</script>
+</html>
+<!-- 笔记 
+	.isActive():Boolean
+
+	指示动画当前是否处于活动状态（表示该虚拟播放头在该实例的时间跨度内活动，并且没有暂停，也没有任何其祖先时间轴）。因此，如果在补间中间，则它处于active状态，但在补间完成后（或在补间开始前），该补间不活动（返回false）。如果它被暂停或者被防止暂停的时间轴内放置在暂停的时间轴内（或者其任何祖先时间轴被暂停），isActive() 则将返回 false。如果播放头直接位于动画开始时间的顶部（即使播放头尚未完成渲染），则视为“有效”。
+
+	您也可以检查 TweenMax.progress() or TweenMax.totalProgress()，但那些没有考虑暂停状态或父时间轴播放头的位置。
+
+	如果你想判断一个元素/对象是否在动画状态，可以使用TweenMax.isTweening()
+
+-->
