@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TweenMax.getTweensOf</title>
+	<style>
+	body{
+		background: #f8f8f8;
+		font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		color:#000;
+		margin: 0 10px;
+		padding: 0;
+	}
+	.box{
+		width: 80px;
+		height: 80px;
+		border-radius: 5px;
+		margin-top: 4px;
+		text-align: center;
+		line-height: 80px;
+		font-size:18px;
+		color:#fff;
+		display: inline-block;
+	}
+	#stats{
+		line-height:2;
+		margin-top:1em;
+	}	
+	.green{
+		background-color: #6fb936;
+	}
+	.orange {
+		background-color: #f38630;
+	}	
+	input[type="button"] {
+		-webkit-appearance:button;
+		padding:8px;
+		margin-right:5px;
+		margin-bottom: 5px;
+	}	
+</style>
+</head>
+<body>	
+	<div class="box green"></div>
+</body>
+<script src="./js/TweenMax-old.js"></script>
+<script src="./plugins/CSSPlugin.js"></script> 
+<script src="./easing/EasePack.js"></script> 
+<script>
+	var myTween = TweenMax.to('.box',3,{		
+		x:500,
+	});
+	myTween.data={var1:'value1',var2:'value2',}
+	console.log(TweenMax.getTweensOf('.box'));
+</script>
+</html>
+<!-- 笔记 
+	.getTweensOf(target:Object,onlyActive:Boolean)
+
+	用来获取某个物体上的所有TweenLite、TweenMax对象、如果my_mc上使用了不止一个缓动效果，那么这里将返回一个数组，数组中是不同的缓动效果的实例，可以用来对每个缓动进行实时的控制
+	TweenMax.getTweensOf(my_mc);
+
+
+-->
