@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TweenMax.globalTimeScale</title>
+	<style>
+	.box{
+		width: 100px;
+		height: 100px;
+		border-radius: 5px;
+		margin-top: 4px;
+		display: inline-block;
+	}
+	.green{
+		background-color: #6fb936;
+	}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="box green"></div>
+</div>
+</body>
+<script src="./js/TweenMax.js"></script> 
+<script>
+TweenMax.globalTimeScale(0.2);
+var myTween = TweenMax.to(".box", 1, {
+  x: 500,
+})	
+</script>
+</html>
+<!-- 笔记 
+	TweenMax.globalTimeScale(value:Number):
+	用来读取或设置所有动画的全局播放速率，例如1是正常速度，0.5是一般速度，2为2倍速度，能取的最小值是0.0001
+	TweenMax.globalTimeScale(0.5);
+	TweenMax.globalTimeScale(2);
+	var currentTimeScale = TweenMax.globalTimeScale();
+
+	TweenMax.globalTimeScale()的补充说明
+	上例中虽然设置了动画为1秒，但是由于全局速率设置为减慢至0.2，因此动画实际运行了5秒。
+	与.timeScale()不同的是，.timeScale()设置的是单个动画的速率。
+-->
